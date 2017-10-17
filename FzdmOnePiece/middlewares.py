@@ -12,6 +12,7 @@ from scrapy.exceptions import IgnoreRequest
 import MySQLdb
 import MySQLdb.cursors
 from FzdmOnePiece.utils.common import get_md5
+from FzdmOnePiece.settings import MYSQL_HOST, MYSQL_DBNAME, MYSQL_USER, MYSQL_PASSWORD
 
 
 class FzdmonepieceSpiderMiddleware(object):
@@ -97,7 +98,7 @@ class JSPageMiddleware(object):
 class MysqlQueryMiddleware(object):
     # 每次请求查询数据库url_object，已存在则跳过
     def __init__(self):
-        conn = MySQLdb.connect(host="127.0.0.1", user="root", passwd="leelr1952", db="fzdmop", charset="utf8")
+        conn = MySQLdb.connect(host=MYSQL_HOST, user=MYSQL_USER, passwd=MYSQL_PASSWORD, db=MYSQL_DBNAME, charset="utf8")
         self.cursor = conn.cursor()
 
     def process_request(self, request, spider):
